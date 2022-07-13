@@ -3,11 +3,11 @@ const sum = (
     | string[]
     | [[[string], string], [string], [[string], [string], string]]
     | [[string, string], [string, string, string]]
-): number => {
+): number | undefined => {
   const a = arr.flat(Infinity);
-  const b = [... new Array<string>];
+  const b: string[] = [];
 
-  let d: string = "";
+  let d = "";
 
   for (let i = 0; i < a.length; i++) {
     if (parseInt(a[i] as string) == (a[i] as unknown as number)) {
@@ -35,16 +35,17 @@ const sum = (
     }
   }
 
-  const nums = [... new Array<number>];
-  for (let i = 0; i < b.length; i++)
-    if (b[i] !== "") nums.push(parseInt(b[i] as string));
+  const nums: number[] = [];
+  for (let i = 0; i < b.length; i++) {
+    if (b[i] !== "") {
+      nums.push(parseInt(b[i] as string));
+    }
+  }
   return nums.reduce((prev, curr) => prev + curr);
 };
 
 console.log(sum(["1", "five", "2wenty", "thr33"]));
-console.log(
-  sum([[["1"], "10v3"], ["738h"], [["s0"], ["1mu4ch3"], "-1s0"]])
-);
+console.log(sum([[["1"], "10v3"], ["738h"], [["s0"], ["1mu4ch3"], "-1s0"]]));
 console.log(
   sum([
     ["1X2", "t3n"],
